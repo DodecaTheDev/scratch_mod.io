@@ -1,5 +1,6 @@
 class ModIO {
   getInfo() {
+    let apiKey = '';
     return {
       id: 'modio',
       name: 'Mod.io',
@@ -9,45 +10,16 @@ class ModIO {
       color3: '#163635', // pure blue
       blocks: [
         {
-          opcode: 'reporter',
+          opcode: 'getKey',
           blockType: Scratch.BlockType.REPORTER,
-          text: 'string [STRING] boolean [BOOLEAN] menu [MENU] field [FIELD]',
-          arguments: {
-            STRING: {
-              type: Scratch.ArgumentType.STRING,
-              defaultValue: '1'
-            },
-            BOOLEAN: {
-              type: Scratch.ArgumentType.BOOLEAN
-            },
-            MENU: {
-              type: Scratch.ArgumentType.STRING,
-              menu: 'MENU'
-            },
-            FIELD: {
-              type: Scratch.ArgumentType.STRING,
-              menu: 'FIELD'
-            }
-          }
-        },
-      ],
-      menus: {
-        MENU: {
-          acceptReporters: true,
-          items: ['item 1', 'item 2']
-        },
-        // We're just including a field example for completion.
-        // Please do not use acceptReporters: false!
-        FIELD: {
-          acceptReporters: false,
-          items: ['item 1', 'item 2']
+          text: 'get api key'
         }
-      }
+      ],
     };
   }
 
   reporter() {
-    return 'This block does nothing';
+    return apiKey;
   }
 }
 
