@@ -1,12 +1,12 @@
-class ColorExample {
+class ModIO {
   getInfo() {
     return {
-      id: 'colorexample',
-      name: 'Color Example',
+      id: 'modio',
+      name: 'Mod.io',
       // intentionally bad colors so that the effect is more clear
-      color1: '#ff0000', // pure red
-      color2: '#00ff00', // pure green
-      color3: '#0000ff', // pure blue
+      color1: '#1D5957', // pure red
+      color2: '#163635', // pure green
+      color3: '#163635', // pure blue
       blocks: [
         {
           opcode: 'reporter',
@@ -51,4 +51,4 @@ class ColorExample {
   }
 }
 
-Scratch.extensions.register(new ColorExample());
+Scratch.extensions.register(new ModIO());
