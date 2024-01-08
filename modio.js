@@ -5,11 +5,11 @@
     throw new Error('This Hello World example must run unsandboxed');
   }
 
-  class HelloWorld {
+  class ModIo {
     getInfo() {
       return {
-        id: 'helloworldunsandboxed',
-        name: 'Unsandboxed Hello World',
+        id: 'modio',
+        name: 'Mod.io',
         blocks: [
           {
             opcode: 'hello',
@@ -23,4 +23,4 @@
       return 'World!';
     }
   }
-  Scratch.extensions.register(new HelloWorld());
+  Scratch.extensions.register(new ModIo());
