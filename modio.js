@@ -1,25 +1,45 @@
 class ModIO {
   getInfo() {
-    let apiKey = '';
     return {
-      id: 'modio',
-      name: 'Mod.io',
-      // intentionally bad colors so that the effect is more clear
-      color1: '#1D5957', // pure red
-      color2: '#163635', // pure green
-      color3: '#163635', // pure blue
+      id: "modio",
+      name: "Mod.io",
+      color1: "#1D5957",
+      color2: "#163635",
+      color3: "#163635",
       blocks: [
         {
-          opcode: 'getKey',
+          opcode: "init",
+          blockType: Scratch.BlockType.COMMAND,
+          text: "initialize",
+        },
+        {
+          opcode: "getKey",
           blockType: Scratch.BlockType.REPORTER,
-          text: 'get api key'
-        }
+          text: "get api key",
+        },
+        {
+          opcode: "setKey",
+          blockType: Scratch.BlockType.COMMAND,
+          text: "set api key to [string]",
+          arguments: {
+            string: {
+              type: Scratch.ArgumentType.STRING,
+              defaultValue: "api key",
+            },
+          },
+        },
       ],
     };
   }
-
-  reporter() {
+  init() {
+    let apiKey,
+    apiKey = "api";
+  }
+  getKey() {
     return apiKey;
+  }
+  setKey() {
+    apiKey = 'A';
   }
 }
 
