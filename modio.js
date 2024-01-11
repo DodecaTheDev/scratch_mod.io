@@ -20,18 +20,18 @@
           {
             opcode: 'setKey',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'set api key to [key]',
+            text: 'set oauth token to [key]',
             arguments: {
             key: {
               type: Scratch.ArgumentType.STRING,
-              defaultValue: 'API KEY'
+              defaultValue: 'OAUTH TOKEN'
             }
             }
           },
           {
             opcode: 'getKey',
             blockType: Scratch.BlockType.REPORTER,
-            text: 'get api key'
+            text: 'get oauth token'
           }
         ]
       };
@@ -41,7 +41,7 @@
     }
     getKey() {
       try {
-        return variables['apiKey'];
+        return variables['oauthKey'];
       } catch (error) {
         console.error(error);
         return '0';
