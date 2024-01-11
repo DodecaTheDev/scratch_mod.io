@@ -1,4 +1,5 @@
 (function(Scratch) {
+  const variables = {};
   'use strict';
 
   if (!Scratch.extensions.unsandboxed) {
@@ -15,9 +16,9 @@
       color3: "#163635",
         blocks: [
           {
-            opcode: 'hello',
-            blockType: Scratch.BlockType.REPORTER,
-            text: 'Hello!'
+            opcode: 'setKey',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'set api key to [key]'
           }
         ]
       };
