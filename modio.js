@@ -1,52 +1,617 @@
 (function(Scratch) {
-  const variables = {};
-  const modURI = "data:image/png;base64,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";
   'use strict';
-
+  
   if (!Scratch.extensions.unsandboxed) {
-    throw new Error('This Hello World example must run unsandboxed');
+    throw new Error('This extension must run unsandboxed');
   }
-
-  class ModIO {
+  
+  const MOD_IO_API_URL = 'https://api.mod.io/v1';
+  const modIcon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAQ/SURBVHgB3ZvxVdswEMa/8PifMEHNBA0TNGyQTkA6AekECROUDUInoEyQdAJgArsTBCb4qkPKw3Es2ZYtEef3np7zbNmSTifpTqcMEAmSE3X5plJi0rCQJTPXZ5X+yXUwGKxxLCgBPLA5SwTmBPFI0JxzHAOqJxP6kSIwsTRgDD9EcEP0HelJ+rNAn1ENmLMdwYdBMFTlx+yGGfqGqvRIpQ27Qb4zQl9Qlb1hd43fkqqUIDbUY3hep3BqlV8xHKmUgQ4ZuB5Kw9Vlkbu1VukvtLn6Cm3OSvqqkpi6CeJwr9KtMpWzqozSca58A8eLY3VZ4bBZq/QI3SFZ7r7MF+J3TKE76MrmV5QKwKi7ND7BcZCpdKmE8Fp8YLMERfUTHA+JSqWO1Z4GqN6f2jIfAXtDoUwAYnklOE4yFIbCzhAwvZ/geElU2rEqdzTgk3r/1lzniIP0/sXehCi9z/gscuUvGI/pnlgY1oIrsimrhLo3YTvXuS6rYsFDxmNFh1lNvXu0Ynje6/A+CZrxcIFda6prpIyfqqwrp2mqnkke9fNH4Prse5dG+im7RdRdxrfX1hb13JSyO1Z0OVTUfnxbUpXu2KHnRu1p3rO5MDam0TOWdILNF1jAb1kSNb+s46W1gXr8ShqZ61khyxu0g/TuJJX5AFtsAhBJiU3go7bnrgIPjVJnyDTgN/wYo0e44gJ/4EfQfXw23BajXuKt+4mnjnef4UeCsMhkdoOPTZAXc19+b3eozrA7R1zZPmYVgAwDVVCGw3OOtho2MmlS4x1rZ8YMjnbFFzTDuQpUCaD/cbkKrAIwS6GPADKEpdMl1qUBvpGYDGF5a5g/cT10CeAafviuHnVprAEuk/zE8kKCerNrkSyCFegj4LHtgWtb3Gf8rxEeHwHc2B7sCcCoyxR+PCIgxqLzmZuGrHPQgno/wDeq2/lBBmPGzow72zbavKHLjKb2t9sUsiwRZgIPqBs+Z6wQO/VmZFuSwje3u8xL1hQEwzU8T7pXH7Y/yrIsaUxayDOvaPyYcXaEacoZFiuwoh8p7b1fmdfknzMuT2U9MKMf0xq9n0eejXJ5l4zPtEwAMv6ajr0y1a8bYbpm3GDMFvtqxWbhqZSFccQw2+pds8jXuRgcrbsZmkHH2rPC+xJyGuNwEVP9In9jxxI0dvxt1UdQ3niZ5cc4bKrapqF9bD7xMGZxHx5QF5abxBLpGfa08SmbWqX8mM3l5YklTxcWZAysrn3VQUl5ce3y8am1QvLFPFkm9ZG4xQs+NkiGpnw5H5j3GOVA5QKhoR42dwxLSq2Zwxp1uZf6IDYMd9QlfmN8CSCEKfoGuzNzZ+gj9P+nWJ7+qH0ZbKcFKT/jDxJdwnYbLb8QgQECQr1cbeDHReijNkLQ6LAxoDI0J4vReCFGeDxDczJE4hTh+Q7tJot5Kv8t2pqs+ejzay5J5CdogCXPf5vNjDPixIb1AAAAAElFTkSuQmCC';
+  let apiKey = '';
+  let gameId = '';
+  let authToken = '';
+  let lastError = null;
+  let lastErrorOccurred = false;
+  let currentModId = null;
+  
+  class PMModIo {
+    constructor() {}
+    
     getInfo() {
       return {
-      id: "modio",
-      name: "mod.io",
-      blockIconURI: modURI,
-      color1: "#1D5957",
-      color2: "#163635",
-      color3: "#163635",
+        id: 'modio',
+        name: 'mod.io',
+        color1: '#07C1D8',
+        color2: '#048291',
+        menuIconURI: modIcon,
+        blockIconURI: modIcon,
         blocks: [
           {
-            opcode: 'setKey',
+            opcode: 'setAuth',
             blockType: Scratch.BlockType.COMMAND,
-            text: 'set oauth token to [key]',
+            text: 'set API key [KEY] and game ID [GAME_ID]',
             arguments: {
-            key: {
-              type: Scratch.ArgumentType.STRING,
-              defaultValue: 'OAUTH TOKEN'
-            }
+              KEY: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'your-api-key'
+              },
+              GAME_ID: {
+                type: Scratch.ArgumentType.NUMBER,
+                defaultValue: 1234
+              }
             }
           },
           {
-            opcode: 'getKey',
+            opcode: 'setAuthToken',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'set OAuth token [TOKEN] for uploading',
+            arguments: {
+              TOKEN: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'your-oauth-token'
+              }
+            }
+          },
+          {
+            opcode: 'initModWithCoverURL',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'create new mod with name [NAME] summary [SUMMARY] and cover image URL [URL]',
+            arguments: {
+              NAME: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'My Awesome Mod'
+              },
+              SUMMARY: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'This is my cool mod created with PenguinMod!'
+              },
+              URL: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'https://example.com/image.png'
+              }
+            }
+          },
+          {
+            opcode: 'addZipUrlToMod',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'add zip file from URL [URL] to current mod with version [VERSION] changelog [CHANGELOG]',
+            arguments: {
+              URL: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'https://example.com/mod.zip'
+              },
+              VERSION: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: '1.0.0'
+              },
+              CHANGELOG: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'Initial release'
+              }
+            }
+          },
+          {
+            opcode: 'uploadGalleryImageFromURL',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'upload gallery image from URL [URL] to current mod',
+            arguments: {
+              URL: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'https://example.com/gallery-image.png'
+              }
+            }
+          },
+          {
+            opcode: 'setModTag',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'add tag [TAG] to current mod',
+            arguments: {
+              TAG: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'game'
+              }
+            }
+          },
+          {
+            opcode: 'addModDependency',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'add dependency mod ID [DEP_MOD_ID] to current mod',
+            arguments: {
+              DEP_MOD_ID: {
+                type: Scratch.ArgumentType.NUMBER,
+                defaultValue: 12345
+              }
+            }
+          },
+          {
+            opcode: 'getMods',
             blockType: Scratch.BlockType.REPORTER,
-            text: 'get oauth token'
+            text: 'get [AMOUNT] mods for game',
+            arguments: {
+              AMOUNT: {
+                type: Scratch.ArgumentType.NUMBER,
+                defaultValue: 10
+              }
+            }
+          },
+          {
+            opcode: 'getModDetails',
+            blockType: Scratch.BlockType.REPORTER,
+            text: 'get details for mod with ID [MOD_ID]',
+            arguments: {
+              MOD_ID: {
+                type: Scratch.ArgumentType.NUMBER,
+                defaultValue: 1
+              }
+            }
+          },
+          {
+            opcode: 'searchMods',
+            blockType: Scratch.BlockType.REPORTER,
+            text: 'search mods with query [QUERY]',
+            arguments: {
+              QUERY: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: 'cool mod'
+              }
+            }
+          },
+          {
+            opcode: 'getCurrentModId',
+            blockType: Scratch.BlockType.REPORTER,
+            text: 'current mod ID'
+          },
+          {
+            opcode: 'didErrorOccur',
+            blockType: Scratch.BlockType.BOOLEAN,
+            text: 'did error occur?'
+          },
+          {
+            opcode: 'getLastError',
+            blockType: Scratch.BlockType.REPORTER,
+            text: 'last error'
+          },
+          {
+            opcode: 'setModVisibility',
+            blockType: Scratch.BlockType.COMMAND,
+            text: 'set mod visibility to [VISIBILITY]',
+            arguments: {
+              VISIBILITY: {
+                type: Scratch.ArgumentType.STRING,
+                menu: 'visibilityOptions',
+                defaultValue: 'public'
+              }
+            }
           }
-        ]
+        ],
+        menus: {
+          visibilityOptions: {
+            acceptReporters: false,
+            items: ['public', 'hidden']
+          }
+        }
       };
     }
-    setKey(args) {
-      variables['apiKey'] = args.key;
+    
+    _setError(error) {
+      lastError = error;
+      lastErrorOccurred = true;
+      return error;
     }
-    getKey() {
+    
+    _clearError() {
+      lastError = null;
+      lastErrorOccurred = false;
+    }
+    
+    _getFileExtension(url, mimeType) {
+      const urlExtension = url.split('.').pop().toLowerCase();
+      if (urlExtension && ['jpg', 'jpeg', 'png'].includes(urlExtension)) {
+        return urlExtension;
+      }
+      
+      if (mimeType) {
+        const mimeExtMap = {
+          'image/jpeg': 'jpg',
+          'image/jpg': 'jpg',
+          'image/png': 'png',
+        };
+        return mimeExtMap[mimeType] || 'png';
+      }
+      
+      return 'png';
+    }
+    
+    didErrorOccur() {
+      return lastErrorOccurred;
+    }
+    
+    getLastError() {
+      return lastError ? JSON.stringify(lastError) : '{}';
+    }
+    
+    getCurrentModId() {
+      return currentModId || 0;
+    }
+    
+    setAuth(args) {
+      this._clearError();
+      apiKey = args.KEY;
+      gameId = args.GAME_ID;
+    }
+    
+    setAuthToken(args) {
+      this._clearError();
+      authToken = args.TOKEN;
+    }
+    
+    async initModWithCoverURL(args) {
+      this._clearError();
+      
+      if (!apiKey || !gameId) {
+        this._setError({error: "API key and game ID must be set first"});
+        return;
+      }
+      
+      if (!authToken) {
+        this._setError({error: "OAuth token must be set for uploading"});
+        return;
+      }
+      
+      if (!args.URL) {
+        this._setError({error: "Cover image URL is required"});
+        return;
+      }
+      
       try {
-        return variables['oauthKey'];
+        const imageResponse = await fetch(args.URL);
+        
+        if (!imageResponse.ok) {
+          this._setError({error: `Failed to fetch image: ${imageResponse.statusText}`});
+          return;
+        }
+        
+        const imageBlob = await imageResponse.blob();
+        const ext = this._getFileExtension(args.URL, imageBlob.type);
+        const imageFile = new File([imageBlob], `cover.${ext}`, { type: imageBlob.type });
+        
+        const formData = new FormData();
+        formData.append('name', args.NAME);
+        formData.append('summary', args.SUMMARY);
+        formData.append('visible', 0);
+        formData.append('logo', imageFile);
+        
+        const response = await fetch(`${MOD_IO_API_URL}/games/${gameId}/mods`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          },
+          body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.error) {
+          this._setError(data);
+        } else if (data.id) {
+          currentModId = data.id;
+        }
       } catch (error) {
-        console.error(error);
-        return '0';
+        this._setError({error: error.message});
+      }
+    }
+    
+    async addZipUrlToMod(args) {
+      this._clearError();
+      
+      if (!apiKey || !gameId) {
+        this._setError({error: "API key and game ID must be set first"});
+        return;
+      }
+      
+      if (!authToken) {
+        this._setError({error: "OAuth token must be set for uploading"});
+        return;
+      }
+      
+      if (!currentModId) {
+        this._setError({error: "No mod initialized. Use 'init mod' first."});
+        return;
+      }
+      
+      if (!args.URL) {
+        this._setError({error: "ZIP file URL is required"});
+        return;
+      }
+      
+      try {
+        const zipResponse = await fetch(args.URL);
+        
+        if (!zipResponse.ok) {
+          this._setError({error: `Failed to fetch ZIP: ${zipResponse.statusText}`});
+          return;
+        }
+        
+        const zipBlob = await zipResponse.blob();
+        const zipFile = new File([zipBlob], 'mod.zip', { type: 'application/zip' });
+        
+        const modfileFormData = new FormData();
+        modfileFormData.append('version', args.VERSION);
+        modfileFormData.append('changelog', args.CHANGELOG);
+        modfileFormData.append('filedata', zipFile);
+        
+        const uploadResponse = await fetch(`${MOD_IO_API_URL}/games/${gameId}/mods/${currentModId}/files`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          },
+          body: modfileFormData
+        });
+        
+        const uploadResult = await uploadResponse.json();
+        
+        if (uploadResult.error) {
+          this._setError(uploadResult);
+        }
+      } catch (error) {
+        this._setError({error: error.message});
+      }
+    }
+    
+    async uploadGalleryImageFromURL(args) {
+      this._clearError();
+      
+      if (!apiKey || !gameId) {
+        this._setError({error: "API key and game ID must be set first"});
+        return;
+      }
+      
+      if (!authToken) {
+        this._setError({error: "OAuth token must be set for uploading"});
+        return;
+      }
+      
+      if (!currentModId) {
+        this._setError({error: "No mod initialized. Use 'init mod' first."});
+        return;
+      }
+      
+      if (!args.URL) {
+        this._setError({error: "Image URL is required"});
+        return;
+      }
+      
+      try {
+        const imageResponse = await fetch(args.URL);
+        
+        if (!imageResponse.ok) {
+          this._setError({error: `Failed to fetch image: ${imageResponse.statusText}`});
+          return;
+        }
+        
+        const imageBlob = await imageResponse.blob();
+        const ext = this._getFileExtension(args.URL, imageBlob.type);
+        const imageFile = new File([imageBlob], `gallery-image.${ext}`, { type: imageBlob.type });
+        
+        const formData = new FormData();
+        formData.append('image', imageFile);
+        
+        const response = await fetch(`${MOD_IO_API_URL}/games/${gameId}/mods/${currentModId}/media`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          },
+          body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.error) {
+          this._setError(data);
+        }
+      } catch (error) {
+        this._setError({error: error.message});
+      }
+    }
+
+    async setModTag(args) {
+      this._clearError();
+      
+      if (!apiKey || !gameId) {
+        this._setError({error: "API key and game ID must be set first"});
+        return;
+      }
+      
+      if (!authToken) {
+        this._setError({error: "OAuth token must be set for uploading"});
+        return;
+      }
+      
+      if (!currentModId) {
+        this._setError({error: "No mod initialized. Use 'init mod' first."});
+        return;
+      }
+      
+      try {
+        const params = new URLSearchParams();
+        params.append('tags[]', args.TAG);
+        
+        const response = await fetch(`${MOD_IO_API_URL}/games/${gameId}/mods/${currentModId}/tags`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: params
+        });
+        
+        const data = await response.json();
+        
+        if (data.error) {
+          this._setError(data);
+        }
+      } catch (error) {
+        this._setError({error: error.message});
+      }
+    }
+    
+    async addModDependency(args) {
+      this._clearError();
+      
+      if (!apiKey || !gameId) {
+        this._setError({error: "API key and game ID must be set first"});
+        return;
+      }
+      
+      if (!authToken) {
+        this._setError({error: "OAuth token must be set for uploading"});
+        return;
+      }
+      
+      if (!currentModId) {
+        this._setError({error: "No mod initialized. Use 'init mod' first."});
+        return;
+      }
+      
+      try {
+        const depModId = parseInt(args.DEP_MOD_ID);
+        
+        if (isNaN(depModId)) {
+          this._setError({error: "Dependency mod ID must be a valid number"});
+          return;
+        }
+        
+        const params = new URLSearchParams();
+        params.append('dependencies[]', depModId.toString());
+        
+        const response = await fetch(`${MOD_IO_API_URL}/games/${gameId}/mods/${currentModId}/dependencies`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: params
+        });
+        
+        const data = await response.json();
+        
+        if (data.error) {
+          this._setError(data);
+        }
+      } catch (error) {
+        this._setError({error: error.message});
+      }
+    }
+
+    async getMods(args) {
+      this._clearError();
+      
+      if (!apiKey || !gameId) {
+        return this._setError({error: "API key and game ID must be set first"});
+      }
+      
+      try {
+        const limit = Math.min(Math.max(parseInt(args.AMOUNT), 1), 100);
+        const response = await fetch(`${MOD_IO_API_URL}/games/${gameId}/mods?api_key=${apiKey}&limit=${limit}`);
+        const data = await response.json();
+        
+        if (data.error) {
+          return this._setError(data);
+        }
+        
+        return JSON.stringify(data);
+      } catch (error) {
+        return this._setError({error: error.message});
+      }
+    }
+    
+    async getModDetails(args) {
+      this._clearError();
+      
+      if (!apiKey || !gameId) {
+        return this._setError({error: "API key and game ID must be set first"});
+      }
+      
+      try {
+        const modId = parseInt(args.MOD_ID);
+        const response = await fetch(`${MOD_IO_API_URL}/games/${gameId}/mods/${modId}?api_key=${apiKey}`);
+        const data = await response.json();
+        
+        if (data.error) {
+          return this._setError(data);
+        }
+        
+        return JSON.stringify(data);
+      } catch (error) {
+        return this._setError({error: error.message});
+      }
+    }
+    
+    async searchMods(args) {
+      this._clearError();
+      
+      if (!apiKey || !gameId) {
+        return this._setError({error: "API key and game ID must be set first"});
+      }
+      
+      try {
+        const query = encodeURIComponent(args.QUERY);
+        const response = await fetch(`${MOD_IO_API_URL}/games/${gameId}/mods?api_key=${apiKey}&_q=${query}`);
+        const data = await response.json();
+        
+        if (data.error) {
+          return this._setError(data);
+        }
+        
+        return JSON.stringify(data);
+      } catch (error) {
+        return this._setError({error: error.message});
+      }
+    }
+    
+    async setModVisibility(args) {
+      this._clearError();
+      
+      if (!apiKey || !gameId) {
+        this._setError({error: "API key and game ID must be set first"});
+        return;
+      }
+      
+      if (!authToken) {
+        this._setError({error: "OAuth token must be set for uploading"});
+        return;
+      }
+      
+      if (!currentModId) {
+        this._setError({error: "No mod initialized. Use 'init mod' first."});
+        return;
+      }
+      
+      try {
+        const visibilityValue = args.VISIBILITY === 'public' ? 1 : 0;
+        
+        const params = new URLSearchParams();
+        params.append('visible', visibilityValue);
+        
+        const response = await fetch(`${MOD_IO_API_URL}/games/${gameId}/mods/${currentModId}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: params
+        });
+        
+        const data = await response.json();
+        
+        if (data.error) {
+          this._setError(data);
+        }
+      } catch (error) {
+        this._setError({error: error.message});
       }
     }
   }
-  Scratch.extensions.register(new ModIO());
+  
+  Scratch.extensions.register(new PMModIo());
 })(Scratch);
